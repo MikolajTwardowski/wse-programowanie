@@ -37,7 +37,7 @@ namespace projekt
         {
             bool continueGame = true;
             int playerPoints = 0;
-            string playerInput;
+            int playerInput;
 
             List<OpenQuestion> openQuestions = new List<OpenQuestion>();
             List<ClosedQuestion> closedQuestions = new List<ClosedQuestion>();
@@ -64,27 +64,28 @@ namespace projekt
                 else
                     break;
 
-                playerInput = Console.ReadLine();
+                playerInput = 0;
+                int.TryParse(Console.ReadLine(), out playerInput); // dorzucone w ostatniej chwili "Pobieranie liczb od gracza" :>
                 
                 bool questionResult = true;
                 
                 if(closedQuestions.Count() > 0 )    // analogicznie jak wyżej - zamiast wyświetlania teraz są podejmowane decyzje w zależności od odpowiedzi gracza
                 {
-                    if(playerInput == "1")  
+                    if(playerInput == 1)  
                     {
                         questionResult = AskClosedQuestion(closedQuestions);
                         if(questionResult)
                             playerPoints += 1;
                     }
 
-                    if(openQuestions.Count() > 0 && playerInput == "2")
+                    if(openQuestions.Count() > 0 && playerInput == 2)
                     {
                         questionResult = AskOpenQuestion(openQuestions);
                         if(questionResult)
                             playerPoints += 5;
                     }
                 }
-                else if(openQuestions.Count() > 0 && playerInput == "1")
+                else if(openQuestions.Count() > 0 && playerInput == 1)
                 {
                     questionResult = AskOpenQuestion(openQuestions);
                     if(questionResult)
